@@ -1,0 +1,14 @@
+-- @nsURI MM=http://www.eclipse.org/uml2/5.0.0/UML
+
+module Refactor;
+create OUT : MM refining IN : MM;
+
+rule name_refactor {
+	from
+		input : MM!Class (input.name = 'Person')
+	to 
+		output : MM!Class (
+			name <- input.name + '_New',
+			ownedAttribute <- input.ownedAttribute
+		)
+}

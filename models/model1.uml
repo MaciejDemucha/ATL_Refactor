@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:type="uml:Model" xmi:id="_model1" name="SampleModel">
+        <packagedElement xmi:type="uml:Class" xmi:id="_class1" name="Person">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_attr1" name="name" type="uml:String" visibility="private"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_attr2" name="age" type="uml:Integer" visibility="private"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Class" xmi:id="_class2" name="Address">
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_attr3" name="street" type="uml:String" visibility="private"/>
+            <ownedAttribute xmi:type="uml:Property" xmi:id="_attr4" name="city" type="uml:String" visibility="private"/>
+        </packagedElement>
+        <packagedElement xmi:type="uml:Association" xmi:id="_association1" memberEnd="_end1 _end2">
+            <ownedEnd xmi:type="uml:Property" xmi:id="_end1" type="_class1" name="person" visibility="private"/>
+            <ownedEnd xmi:type="uml:Property" xmi:id="_end2" type="_class2" name="address" visibility="private"/>
+        </packagedElement>
+    </uml:Model>
