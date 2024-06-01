@@ -3,6 +3,11 @@
         <packagedElement xmi:type="uml:Class" xmi:id="_class1" name="Person">
             <ownedAttribute xmi:type="uml:Property" xmi:id="_attr1" name="name" type="uml:String" visibility="private"/>
             <ownedAttribute xmi:type="uml:Property" xmi:id="_attr2" name="age" type="uml:Integer" visibility="private"/>
+			<ownedOperation xmi:type="uml:Operation" xmi:id="_op1" name="getAge" concurrency="concurrent">
+				<ownedParameter xmi:type="uml:Parameter" xmi:id="_param1" name="age">
+				<type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+				</ownedParameter>
+			</ownedOperation>
         </packagedElement>
         <packagedElement xmi:type="uml:Class" xmi:id="_class2" name="Address">
             <ownedAttribute xmi:type="uml:Property" xmi:id="_attr3" name="street" type="uml:String" visibility="private"/>

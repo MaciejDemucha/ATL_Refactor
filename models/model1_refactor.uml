@@ -2,7 +2,12 @@
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_model1" name="SampleModel">
   <packagedElement xmi:type="uml:Class" xmi:id="_class1" name="Person_New">
     <ownedAttribute xmi:id="_attr1" name="name" visibility="private"/>
-    <ownedAttribute xmi:id="_attr2" name="age" visibility="private"/>
+    <ownedAttribute xmi:id="_attr2" name="age_New" visibility="private"/>
+    <ownedOperation xmi:id="_op1" name="getAge_New" concurrency="concurrent">
+      <ownedParameter xmi:id="_param1" name="age_New">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_class2" name="Address">
     <ownedAttribute xmi:id="_attr3" name="street" visibility="private"/>
