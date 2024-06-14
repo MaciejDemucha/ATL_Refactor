@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+  <uml:Model xmi:type="uml:Model" name="UMLModel" visibility="public" xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_model1">
+    <!-- Class C1 -->
+    <packagedElement xmi:type="uml:Class" xmi:id="C1" name="C1" visibility="public"/>
+
+    <!-- Class C2 with attribute of type C1 -->
+    <packagedElement xmi:type="uml:Class" xmi:id="C2" name="C2" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="C2_attr1" name="attr1" type="C1" visibility="public"/>
+    </packagedElement>
+
+    <!-- Interface I1 with two methods -->
+    <packagedElement xmi:type="uml:Interface" xmi:id="I1" name="I1" visibility="public">
+      <ownedOperation xmi:id="I1_method1" name="method1" visibility="public"/>
+      <ownedOperation xmi:id="I1_method2" name="method2" visibility="public"/>
+    </packagedElement>
+
+    <!-- Class C3 implementing I1 -->
+    <packagedElement xmi:type="uml:Class" xmi:id="C3" name="C3" visibility="public">
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="C3_I1" contract="I1" implementingClassifier="C3"/>
+    </packagedElement>
+
+    <!-- Class C4 with attribute of type C1 and implementing I1 -->
+    <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="public">
+      <ownedAttribute xmi:type="uml:Property" xmi:id="C4_attr1" name="attr1" type="C1" visibility="public"/>
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="C4_I1" contract="I1" implementingClassifier="C4"/>
+    </packagedElement>
+
+    <!-- Association between C2 and C1 -->
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_C2_C1">
+      <ownedEnd xmi:type="uml:Property" xmi:id="assoc_C2_C1_end1" name="C2_attr1" type="C1" visibility="public"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="assoc_C2_C1_end2" name="C2" type="C2" visibility="public"/>
+    </packagedElement>
+
+    <!-- Association between C4 and C1 -->
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_C4_C1">
+      <ownedEnd xmi:type="uml:Property" xmi:id="assoc_C4_C1_end1" name="C4_attr1" type="C1" visibility="public"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="assoc_C4_C1_end2" name="C4" type="C4" visibility="public"/>
+    </packagedElement>
+  </uml:Model>
