@@ -1,0 +1,32 @@
+-- @nsURI MM=http://www.eclipse.org/uml2/5.0.0/UML
+
+module Refactor2;
+create OUT : MM from IN : MM;
+
+rule ClassTransformation {
+    from
+        s : MM!Class
+    to
+        t : MM!Class (
+            name <- s.name,
+            attribute <- s.attribute->collect(a | 
+                if a.type.name = 'C1' then
+                    thisModule.CompositeAttribute(a)
+                else
+                    a
+                endif
+            )
+        )
+}
+
+-- Lazy rule to change the aggregation to composite
+lazy rule CompositeAttribute {
+    from
+        s : MM!Property
+    to
+        t : MM!Property (
+            name <- s.name,
+            type <- s.type,
+            aggregation <- #composite -- Changing aggregation to composite
+        )
+}

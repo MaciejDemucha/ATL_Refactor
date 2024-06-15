@@ -3,18 +3,46 @@
 module Refactor;
 create OUT : MM refining IN : MM;
 
-rule dynamic_rename_classname {
-	from
-		input : MM!Class (input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id) and targetComment.body.split(';')->at(2) = 'class_name')
-		
-		using {
-				comment_id : String = '_IkbsoCmpEe-KpKn8DjMboA';
-				targetComment : MM!Comment = input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id);
-		      }
-	to 
-		output : MM!Class (
-			name <- targetComment.body.split(';')->at(3),
-			ownedAttribute <- input.ownedAttribute,
-			ownedOperation <- input.ownedOperation
-		)
+--rule dynamic_rename_classname {
+--	from
+--		input : MM!Class (input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id) and targetComment.body.split(';')->at(2) = 'class_name')
+--		
+--		using {
+--				comment_id : String = '_IkbsoCmpEe-KpKn8DjMboA';
+--				targetComment : MM!Comment = input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id);
+--		      }
+---	to 
+--		output : MM!Class (
+--			name <- targetComment.body.split(';')->at(3),
+--			ownedAttribute <- input.ownedAttribute,
+--			ownedOperation <- input.ownedOperation
+--		)
+--}
+
+
+
+
+-- Rule to refine the class
+rule ClassRefinement {
+    from
+        s : MM!Class
+    to
+        t : MM!Class (
+            -- Copy all attributes and modify if type is 'Class1'
+            attributes <- s.attributes->collect(a | 
+                if a.type.name = 'Class1' then
+                    thisModule.modifyAggregation(a)
+                else
+                    a
+                endif
+            )
+        )
 }
+
+-- Helper function to modify the aggregation kind
+helper context MM!Class def: modifyAggregation(attr : MM!Attribute) : MM!Attribute =
+    MM!Attribute {
+        name <- attr.name,
+        type <- attr.type,
+        aggregation <- 'composite' -- Changing aggregation to composite
+    };
