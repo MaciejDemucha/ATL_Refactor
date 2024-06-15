@@ -3,18 +3,36 @@
 module Refactor;
 create OUT : MM refining IN : MM;
 
-rule dynamic_rename_classname {
-	from
-		input : MM!Class (input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id) and targetComment.body.split(';')->at(2) = 'class_name')
-		
-		using {
-				comment_id : String = '_IkbsoCmpEe-KpKn8DjMboA';
-				targetComment : MM!Comment = input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id);
-		      }
-	to 
-		output : MM!Class (
-			name <- targetComment.body.split(';')->at(3),
-			ownedAttribute <- input.ownedAttribute,
-			ownedOperation <- input.ownedOperation
-		)
+--rule dynamic_rename_classname {
+--	from
+--		input : MM!Class (input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id) and targetComment.body.split(';')->at(2) = 'class_name')
+--		
+--		using {
+--				comment_id : String = '_IkbsoCmpEe-KpKn8DjMboA';
+--				targetComment : MM!Comment = input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id);
+--		      }
+--	to 
+--		output : MM!Class (
+--			name <- targetComment.body.split(';')->at(3),
+--			ownedAttribute <- input.ownedAttribute,
+--			ownedOperation <- input.ownedOperation
+--		)
+--}
+-- Rule to copy classes with interface realizations and add operations from interfaces
+-- Rule to copy classes with interface realizations and add operations from interfaces
+rule ClassWithInterfaceRealization2Class {
+    from
+        c : MM!Class
+    to
+        outC : MM!Class (
+            name <- c.name,
+            isAbstract <- c.isAbstract,
+            visibility <- c.visibility,
+            ownedAttribute <- c.ownedAttribute,
+            ownedOperation <- c.ownedOperation->union(
+                c.interfaceRealization->collect(ir | ir.contract.ownedOperation)->select(op |
+                    c.ownedOperation->select(existingOp | existingOp.name = op.name)->isEmpty()
+                )
+            )
+        )
 }
