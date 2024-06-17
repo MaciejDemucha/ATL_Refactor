@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML">
+  <uml:Class xmi:id="_cqqlMCyVEe-07t-pSwxPqA" name="Person">
+    <ownedComment xmi:id="_cqqlOyyVEe-07t-pSwxPqA">
+      <body>_IkbsoCmpEe-KpKn8DjMboA;class_name;Person_New</body>
+    </ownedComment>
+    <ownedAttribute xmi:id="_cqqlMyyVEe-07t-pSwxPqA" name="name" visibility="private"/>
+    <ownedAttribute xmi:id="_cqqlNCyVEe-07t-pSwxPqA" name="age" visibility="private"/>
+    <ownedOperation xmi:id="_cqqlOSyVEe-07t-pSwxPqA" name="getAge" concurrency="concurrent">
+      <ownedParameter xmi:id="_cqqlOiyVEe-07t-pSwxPqA" name="age">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+  </uml:Class>
+  <uml:Class xmi:id="_cqqlMSyVEe-07t-pSwxPqA" name="Address">
+    <ownedAttribute xmi:id="_cqqlNSyVEe-07t-pSwxPqA" name="street" visibility="private"/>
+    <ownedAttribute xmi:id="_cqqlNiyVEe-07t-pSwxPqA" name="city" visibility="private"/>
+  </uml:Class>
+  <uml:Association xmi:id="_cqqlMiyVEe-07t-pSwxPqA" memberEnd="_cqqlNyyVEe-07t-pSwxPqA _cqqlOCyVEe-07t-pSwxPqA">
+    <ownedEnd xmi:id="_cqqlNyyVEe-07t-pSwxPqA" name="person" visibility="private" type="_cqqlMCyVEe-07t-pSwxPqA" association="_cqqlMiyVEe-07t-pSwxPqA"/>
+    <ownedEnd xmi:id="_cqqlOCyVEe-07t-pSwxPqA" name="address" visibility="private" type="_cqqlMSyVEe-07t-pSwxPqA" aggregation="composite" association="_cqqlMiyVEe-07t-pSwxPqA"/>
+  </uml:Association>
+</xmi:XMI>

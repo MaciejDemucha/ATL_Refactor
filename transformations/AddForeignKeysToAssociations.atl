@@ -1,0 +1,170 @@
+-- @nsURI MM=http://www.eclipse.org/uml2/5.0.0/UML
+
+module AddForeignKeysToAssociations;
+
+create OUT : UML from IN : UML;
+
+
+-- Helper to find if a class has a field with a given name
+helper context UML!Class def : hasField(fieldName : String) : Boolean =
+    self.ownedAttribute->exists(attr | attr.name = fieldName);
+
+helper context UML!Class def : compositeAssociations : Sequence(UML!Association) =
+    UML!Association.allInstances()->select(assoc |
+        assoc.ownedEnd->exists(end | end.aggregation = 'composite' and end.type = self)
+    );
+
+
+--rule ClassTransformation {
+--    from
+--        inClass : UML!Class
+--    to
+--        outClass : UML!Class (
+--            name <- inClass.name,
+--            ownedAttribute <- inClass.ownedAttribute -> union(
+--            	createForeignKey(getAssociation(inClass))
+--            ),
+--            ownedOperation <- inClass.ownedOperation,
+--			ownedComment <- inClass.ownedComment
+--        )
+--}
+--rule ClassTransformation {
+--    from
+--        inClass : UML!Class
+--    to
+--        outClass : UML!Class (
+--            name <- inClass.name,
+--            ownedAttribute <- inClass.ownedAttribute,
+--            ownedOperation <- inClass.ownedOperation,
+--			ownedComment <- inClass.ownedComment
+--        )
+--}
+
+helper context UML!Class def : isASuperclass(): Boolean = 
+	UML!Association.allInstances()->exists(assoc | 
+		assoc.ownedEnd->exists(end |
+			end.aggregation = 'composite' and end.type = self
+			)
+		);
+
+helper def : getAssociation(clazz : UML!Class) : UML!Association =
+    UML!Association.allInstances()->select(assoc | 
+        assoc.ownedEnd->exists(end |
+            end.aggregation = 'composite' and end.type = clazz
+        )
+    )->first();
+
+helper def : createForeignKey(assoc : UML!Association) : UML!Property =
+--    let owningEnd = assoc.ownedEnd->select(end | end.aggregation = 'composite')->first() in
+--    let targetType = assoc.ownedEnd->select(end | end.aggregation <> 'composite' and end.type.oclIsKindOf(UML!Class))->first().type in
+    UML!Property.newInstance(
+--        name <- owningEnd.type.name.concat('_id'),
+--        type <- targetType,
+--        visibility <- 'private'
+    );
+
+--rule AddingFKTransformation {
+--    from
+--        i : UML!Class (i.isASuperclass())
+--    to
+--        out : UML!Class (
+--            name <- i.name,
+--            ownedAttribute <- i.ownedAttribute->including(createForeignKey(getAssociation(i))),
+--            ownedOperation <- i.ownedOperation,
+--            ownedComment <- i.ownedComment
+--        )
+--}
+
+
+
+-- Rule to handle associations and add foreign keys if necessary
+rule AssociationTransformation {
+    from
+        assoc : UML!Association
+    to
+        outAssoc : UML!Association (
+            memberEnd <- assoc.memberEnd,
+            ownedEnd <- assoc.ownedEnd
+        )
+--        fkField : UML!Property (
+--            name <- assoc.ownedEnd->first().name.concat('_id'),
+--            type <- assoc.ownedEnd->first().type,
+--            visibility <- 'private',
+--            association <- assoc
+--        )
+--    do {
+--        -- Find the superclass and the subclass from the association ends
+--        let superClass = assoc.ownedEnd->first().type in
+--        let subClass = assoc.ownedEnd->last().type in
+--
+--        -- Ensure types are UML!Class before proceeding
+--        if superClass.oclIsKindOf(UML!Class) and subClass.oclIsKindOf(UML!Class) then {
+--            let superClassAsClass = superClass.oclAsType(UML!Class) in
+--            let subClassAsClass = subClass.oclAsType(UML!Class) in
+--
+--            -- Check if the superclass already has the foreign key field
+--            if not superClassAsClass.hasField(subClassAsClass.name.concat('_id')) then {
+--                -- Add the foreign key field to the superclass
+--                superClassAsClass.ownedAttribute->including(fkField);
+--            }
+--        }
+--    }
+}
+
+--rule AssociationTransformations {
+--	from
+--		inA : UML!Association
+--	to 
+--		outA : UML!Association (
+--			memberEnd <- inA.memberEnd
+--		)
+--}
+
+-- Rule to copy properties (fields) from input to output
+rule PropertyTransformation {
+    from
+        inProperty : UML!Property
+    to
+        outProperty : UML!Property (
+            name <- inProperty.name,
+            type <- inProperty.type,
+            visibility <- inProperty.visibility,
+            association <- inProperty.association,
+			aggregation <- inProperty.aggregation
+        )
+}
+
+
+
+-- Rule to copy operations from input to output
+rule OperationTransformation {
+    from
+        inOperation : UML!Operation
+    to
+        outOperation : UML!Operation (
+            name <- inOperation.name,
+            concurrency <- inOperation.concurrency,
+            ownedParameter <- inOperation.ownedParameter
+        )
+}
+
+rule OwnedParameterTransformation {
+	from
+		inParam : UML!Parameter
+	to 
+		outParam : UML!Parameter (
+			name <- inParam.name,
+			type <- inParam.type
+		)
+}
+
+
+-- Rule to copy comments from input to output
+rule CommentTransformation {
+    from
+        inComment : UML!Comment
+    to
+        outComment : UML!Comment (
+            body <- inComment.body
+        )
+}
