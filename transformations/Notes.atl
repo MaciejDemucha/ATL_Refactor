@@ -3,6 +3,47 @@
 module Refactor;
 create OUT : MM refining IN : MM;
 
+rule class_name {
+	from
+		input : MM!Class (input.name = 'Person')
+	to 
+		output : MM!Class (
+			name <- input.name + '_New',
+			ownedAttribute <- input.ownedAttribute,
+			ownedOperation <- input.ownedOperation
+		)
+}
+
+
+
+rule attribute_name {
+	from
+		input_name : MM!Property(input_name.name = 'age')
+	to 
+		output_name : MM!Property (
+			name <- input_name.name + '_New'
+		)
+}
+
+rule method_name {
+	from
+		input_name : MM!Operation(input_name.name = 'getAge')
+	to 
+		output_name : MM!Operation (
+			name <- input_name.name + '_New'
+		)
+}
+
+rule parameter_name {
+    from
+        input_parameter : MM!Parameter(input_parameter.operation.name = 'getAge' and input_parameter.name = 'age')
+    to 
+        output_parameter : MM!Parameter (
+            name <- input_parameter.name + '_New'
+        )
+}
+
+
 rule dynamic_rename_classname {
 	from
 		input : MM!Class (input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id) and targetComment.body.split(';')->at(2) = 'class_name')
