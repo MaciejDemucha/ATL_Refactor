@@ -16,11 +16,11 @@
     <interfaceRealization xmi:id="C4_I1" contract="I1"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="assoc_C2_C1">
-    <ownedEnd xmi:id="assoc_C2_C1_end1" name="C2_attr1" visibility="public" type="C1"/>
-    <ownedEnd xmi:id="assoc_C2_C1_end2" name="C2" visibility="public" type="C2"/>
+    <ownedEnd xmi:id="assoc_C2_C1_end1" name="C2_attr1" visibility="public" type="C1" aggregation="composite"/>
+    <ownedEnd xmi:id="assoc_C2_C1_end2" name="C2" visibility="public" type="C2" aggregation="composite"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="assoc_C4_C1">
-    <ownedEnd xmi:id="assoc_C4_C1_end1" name="C4_attr1" visibility="public" type="C1"/>
-    <ownedEnd xmi:id="assoc_C4_C1_end2" name="C4" visibility="public" type="C4"/>
+    <ownedEnd xmi:id="assoc_C4_C1_end1" name="C4_attr1" visibility="public" type="C1" aggregation="composite"/>
+    <ownedEnd xmi:id="assoc_C4_C1_end2" name="C4" visibility="public" type="C4" aggregation="composite"/>
   </packagedElement>
 </uml:Model>
