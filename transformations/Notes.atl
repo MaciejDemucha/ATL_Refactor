@@ -3,28 +3,76 @@
 module Refactor;
 create OUT : MM refining IN : MM;
 
-rule class_name {
+
+-- reguły do zmiany nazwy klasy oraz dopasowanie typu atrybutów, parametrów oraz nazw konstruktorów
+rule OperationParameterTypeTransform {
+    from
+        param : MM!Parameter (param.type.name = MM!Class.allInstances()->select(c | c.name = 'Nationality').first().oclType() and param.oclIsUndefined() = false)
+		using{
+        	new_name: String = 'Nationality_New';
+        }
+    to
+         newParam : MM!Parameter (
+            name <- param.name,
+            type <- MM!Class.allInstances()->select(c | c.name = new_name).first().oclType()
+        )
+}
+
+
+rule AttributeTypeTransform {
+    from
+        attr : MM!Property (attr.type = MM!Class.allInstances()->select(c | c.name = 'Nationality').first().oclType() and attr.oclIsUndefined() = false)
+		using{
+        	new_name: String = 'Nationality_New';
+        }
+    to
+        newAttr : MM!Property (
+            name <- attr.name,
+             type <- MM!Class.allInstances()->select(c | c.name = new_name).first().oclType()
+        )
+}
+
+rule ClassTransform {
 	from
-		input : MM!Class (input.name = 'Person')
+		input : MM!Class (input.name = 'Nationality')
+		using{
+        	new_name: String = 'Nationality_New';
+        }
 	to 
 		output : MM!Class (
-			name <- input.name + '_New',
+			name <- new_name,
 			ownedAttribute <- input.ownedAttribute,
 			ownedOperation <- input.ownedOperation
 		)
 }
 
 
+rule ConstructorTransform {
+    from
+        op : MM!Operation (op.name = 'Nationality' and op.oclIsTypeOf(MM!Operation) and op.oclIsUndefined() = false)
+		
+		using{
+        	new_name: String = 'Nationality_New';
+        }
+    to
+        newOp : MM!Operation (
+            name <- new_name,
+            ownedParameter <- op.ownedParameter
+        )
+}
 
+
+--reguła do zmiany nazwy atrybutu klasy
 rule attribute_name {
 	from
-		input_name : MM!Property(input_name.name = 'age')
+		input_name : MM!Property(input_name.name = 'name')
 	to 
 		output_name : MM!Property (
 			name <- input_name.name + '_New'
 		)
 }
 
+--reguła do zmiany nazwy metody klasy
 rule method_name {
 	from
 		input_name : MM!Operation(input_name.name = 'getAge')
@@ -34,6 +82,7 @@ rule method_name {
 		)
 }
 
+--reguła do zmiany nazwy parametru metody
 rule parameter_name {
     from
         input_parameter : MM!Parameter(input_parameter.operation.name = 'getAge' and input_parameter.name = 'age')
@@ -44,18 +93,20 @@ rule parameter_name {
 }
 
 
-rule dynamic_rename_classname {
-	from
-		input : MM!Class (input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id) and targetComment.body.split(';')->at(2) = 'class_name')
-		
-		using {
-				comment_id : String = '_IkbsoCmpEe-KpKn8DjMboA';
-				targetComment : MM!Comment = input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id);
-		      }
-	to 
-		output : MM!Class (
-			name <- targetComment.body.split(';')->at(3),
-			ownedAttribute <- input.ownedAttribute,
-			ownedOperation <- input.ownedOperation
-		)
-}
+
+
+--rule dynamic_rename_classname {
+--	from
+--		input : MM!Class (input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id) and targetComment.body.split(';')->at(2) = 'class_name')
+--		
+--		using {
+--				comment_id : String = '_IkbsoCmpEe-KpKn8DjMboA';
+--				targetComment : MM!Comment = input.ownedComment->any(c | c.body.split(';')->at(1) = comment_id);
+--		      }
+--	to 
+--		output : MM!Class (
+--			name <- targetComment.body.split(';')->at(3),
+--			ownedAttribute <- input.ownedAttribute,
+--			ownedOperation <- input.ownedOperation
+--		)
+--}
