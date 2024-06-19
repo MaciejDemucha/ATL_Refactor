@@ -1,0 +1,39 @@
+-- @nsURI MM=http://www.eclipse.org/uml2/5.0.0/UML
+
+module Class2Interface;
+create OUT : MM refining IN : MM;
+
+--rule ClassWithInterfaceRealization2Class {
+--    from
+--        c : MM!Class (c.interfaceRealization->notEmpty())
+--    to
+--        outC : MM!Class (
+--            name <- c.name,
+--            isAbstract <- c.isAbstract,
+--            visibility <- 'private', --'private' for debugging purposes to check if viable classes are changed
+--            ownedAttribute <- c.ownedAttribute,
+--			ownedOperation <- c.ownedOperation,
+--            ownedOperation <-c.interfaceRealization->collect(ir | ir.contract.ownedOperation)->select(op |
+--                    c.ownedOperation->select(existingOp | existingOp.name = op.name)->isEmpty()
+--            )
+--        )
+--}
+
+helper def : getIntOperations(i : MM!Interface) : Sequence(MM!Operation) =
+	i.ownedOperation.asSequence();
+
+helper def: emptyOperations(int : MM!Interface) : Sequence(MM!Operation) = 
+    int.ownedOperation.asSequence()->collect(i | thisModule.createEmptyOperation());
+
+helper def: createEmptyOperation() : MM!Operation = 
+    MM!Operation.newInstance();
+
+rule ImplementInterface {
+	from
+		c : MM!Class (c.interfaceRealization->notEmpty())
+	to
+		outC : MM!Class (
+			--ownedOperation <- thisModule.getIntOperations(c.interfaceRealization.first().contract)
+			ownedOperation <- thisModule.emptyOperations(c.interfaceRealization.first().contract)
+		)
+}
