@@ -16,9 +16,8 @@
 
     <!-- Class C3 implementing I1 -->
     <packagedElement xmi:type="uml:Class" xmi:id="C3" name="C3" visibility="public">
-    <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="C3_I1" contract="I1" implementingClassifier="C3"/>
-	</packagedElement>
-    
+      <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="C3_I1" contract="I1" implementingClassifier="C3"/>
+    </packagedElement>
 
     <!-- Class C4 with attribute of type C1 and implementing I1 -->
     <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="public">

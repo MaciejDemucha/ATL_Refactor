@@ -4,20 +4,15 @@
   <packagedElement xmi:type="uml:Class" xmi:id="C2" name="C2" visibility="public">
     <ownedAttribute xmi:id="C2_attr1" name="attr1" visibility="public" type="C1"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Interface" xmi:id="I1" name="I1" visibility="public">
-    <ownedOperation xmi:id="I1_method1" name="method1" visibility="public"/>
-    <ownedOperation xmi:id="I1_method2" name="method2" visibility="public"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="C3" name="C3" visibility="public">
+  <packagedElement xmi:type="uml:Interface" xmi:id="I1" name="I1" visibility="public"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="C3" name="C3" visibility="private">
     <interfaceRealization xmi:id="C3_I1" contract="I1"/>
-    <ownedOperation xmi:id="_zAa98C5QEe-Xu8B39UsIrQ"/>
-    <ownedOperation xmi:id="_zAa98S5QEe-Xu8B39UsIrQ"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="public">
+  <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="private">
     <ownedAttribute xmi:id="C4_attr1" name="attr1" visibility="public" type="C1"/>
     <interfaceRealization xmi:id="C4_I1" contract="I1"/>
-    <ownedOperation xmi:id="_zAa98i5QEe-Xu8B39UsIrQ"/>
-    <ownedOperation xmi:id="_zAa98y5QEe-Xu8B39UsIrQ"/>
+    <ownedOperation xmi:id="I1_method1" name="method1" visibility="public"/>
+    <ownedOperation xmi:id="I1_method2" name="method2" visibility="public"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="assoc_C2_C1">
     <ownedEnd xmi:id="assoc_C2_C1_end1" name="C2_attr1" visibility="public" type="C1"/>
