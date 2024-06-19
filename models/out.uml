@@ -5,10 +5,10 @@
     <ownedAttribute xmi:id="C2_attr1" name="attr1" visibility="public" type="C1"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Interface" xmi:id="I1" name="I1" visibility="public"/>
-  <packagedElement xmi:type="uml:Class" xmi:id="C3" name="C3" visibility="private">
+  <packagedElement xmi:type="uml:Class" xmi:id="C3" name="C3" visibility="public">
     <interfaceRealization xmi:id="C3_I1" contract="I1"/>
   </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="private">
+  <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="public">
     <ownedAttribute xmi:id="C4_attr1" name="attr1" visibility="public" type="C1"/>
     <interfaceRealization xmi:id="C4_I1" contract="I1"/>
     <ownedOperation xmi:id="I1_method1" name="method1" visibility="public"/>

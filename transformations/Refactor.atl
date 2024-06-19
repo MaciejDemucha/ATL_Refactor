@@ -18,19 +18,21 @@ create OUT : MM refining IN : MM;
 --			ownedOperation <- input.ownedOperation
 --		)
 --}
-
+-- Rule to copy classes with interface realizations and add operations from interfaces
+-- Rule to copy classes with interface realizations and add operations from interfaces
 rule ClassWithInterfaceRealization2Class {
     from
-        c : MM!Class (c.interfaceRealization->notEmpty())
+        c : MM!Class
     to
         outC : MM!Class (
             name <- c.name,
             isAbstract <- c.isAbstract,
-            visibility <- 'private', --'private' for debugging purposes to check if viable classes are changed
+            visibility <- c.visibility,
             ownedAttribute <- c.ownedAttribute,
-			ownedOperation <- c.ownedOperation,
-            ownedOperation <-c.interfaceRealization->collect(ir | ir.contract.ownedOperation)->select(op |
+            ownedOperation <- c.ownedOperation->union(
+                c.interfaceRealization->collect(ir | ir.contract.ownedOperation)->select(op |
                     c.ownedOperation->select(existingOp | existingOp.name = op.name)->isEmpty()
+                )
             )
         )
 }
