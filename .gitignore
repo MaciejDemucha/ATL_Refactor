@@ -1,0 +1,9 @@
+# Ignore all folders besides ATL_refactor and Acceleo_refactor
+/.metadata
+/lab10_miasi
+/lab11_miasi
+/lab12_miasi
+/M2T_module
+/MIASI_Acceleo_UMLToCode
+/org.eclipse.acceleo.module.lab13miasi
+/lab13miasi.zip
