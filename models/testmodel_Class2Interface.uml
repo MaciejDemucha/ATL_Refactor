@@ -10,14 +10,14 @@
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="C3" name="C3" visibility="public">
     <interfaceRealization xmi:id="C3_I1" contract="I1"/>
-    <ownedOperation xmi:id="_5h7w4C5VEe-Xu8B39UsIrQ"/>
-    <ownedOperation xmi:id="_5h7w4S5VEe-Xu8B39UsIrQ"/>
+    <ownedOperation xmi:id="_slOMIC8AEe-Xu8B39UsIrQ"/>
+    <ownedOperation xmi:id="_slOMIS8AEe-Xu8B39UsIrQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="public">
     <ownedAttribute xmi:id="C4_attr1" name="attr1" visibility="public" type="C1"/>
     <interfaceRealization xmi:id="C4_I1" contract="I1"/>
-    <ownedOperation xmi:id="_5h7w4i5VEe-Xu8B39UsIrQ"/>
-    <ownedOperation xmi:id="_5h7w4y5VEe-Xu8B39UsIrQ"/>
+    <ownedOperation xmi:id="_slOMIi8AEe-Xu8B39UsIrQ"/>
+    <ownedOperation xmi:id="_slOMIy8AEe-Xu8B39UsIrQ"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="assoc_C2_C1">
     <ownedEnd xmi:id="assoc_C2_C1_end1" name="C2_attr1" visibility="public" type="C1"/>
@@ -26,5 +26,9 @@
   <packagedElement xmi:type="uml:Association" xmi:id="assoc_C4_C1">
     <ownedEnd xmi:id="assoc_C4_C1_end1" name="C4_attr1" visibility="public" type="C1"/>
     <ownedEnd xmi:id="assoc_C4_C1_end2" name="C4" visibility="public" type="C4"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="assoc_C4_C3">
+    <ownedEnd xmi:id="assoc_C4_C3_end1" name="C4_attr2" visibility="public" type="C3"/>
+    <ownedEnd xmi:id="assoc_C4_C3_end2" name="C4" visibility="public" type="C4"/>
   </packagedElement>
 </uml:Model>

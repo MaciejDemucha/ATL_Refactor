@@ -22,6 +22,7 @@
     <!-- Class C4 with attribute of type C1 and implementing I1 -->
     <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="public">
       <ownedAttribute xmi:type="uml:Property" xmi:id="C4_attr1" name="attr1" type="C1" visibility="public"/>
+      <!-- <ownedAttribute xmi:type="uml:Class" xmi:id="C4_attr2" name="attr2" type="C3" visibility="public"/> -->
       <interfaceRealization xmi:type="uml:InterfaceRealization" xmi:id="C4_I1" contract="I1" implementingClassifier="C4"/>
     </packagedElement>
 
@@ -35,5 +36,11 @@
     <packagedElement xmi:type="uml:Association" xmi:id="assoc_C4_C1">
       <ownedEnd xmi:type="uml:Property" xmi:id="assoc_C4_C1_end1" name="C4_attr1" type="C1" visibility="public"/>
       <ownedEnd xmi:type="uml:Property" xmi:id="assoc_C4_C1_end2" name="C4" type="C4" visibility="public"/>
+    </packagedElement>
+    
+    <!-- Association between C4 and C3 -->
+    <packagedElement xmi:type="uml:Association" xmi:id="assoc_C4_C3">
+      <ownedEnd xmi:type="uml:Property" xmi:id="assoc_C4_C3_end1" name="C4_attr2" type="C3" visibility="public"/>
+      <ownedEnd xmi:type="uml:Property" xmi:id="assoc_C4_C3_end2" name="C4" type="C4" visibility="public"/>
     </packagedElement>
   </uml:Model>
