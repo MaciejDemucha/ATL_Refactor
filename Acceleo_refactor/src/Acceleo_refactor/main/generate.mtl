@@ -4,22 +4,38 @@
  [template public generateElement(aClass : Class)] 
   [comment @main /]
  [file (aClass.name.concat('.java'), false)]
-   public class [aClass.name.toUpperFirst()/] {
+	[if (aClass.interfaceRealization->notEmpty())]
+public class [aClass.name.toUpperFirst()/] implements[for (i: Interface | aClass.interfaceRealization.contract) separator(', ')][' ' + i.name/][/for] {
+	[else]
+public class [aClass.name.toUpperFirst()/] {
+	[/if]
    [for (p: Property | aClass.attribute) separator('\n')]
-     private [p.type.name/] [p.name/];
-   [/for]
- 
-   [for (p: Property | aClass.attribute) separator('\n')]
-     public [p.type.name/] get[p.name.toUpperFirst()/]() {
-       return this.[p.name/];
-     }
+     [p.visibility.toString()/] [p.type.name/] [p.name/];
    [/for]
  
    [for (o: Operation | aClass.ownedOperation) separator('\n')]
+[if (o.name.oclIsUndefined())]
+	[let interfaces : Set(Interface) = aClass.owner.ownedElement->select(elem : Element | elem.oclIsTypeOf(Interface))]
+		[for (interface : Interface | interfaces)]
+			[for (op : Operation | interface.ownedOperation)]
+[comment]				[if (op.)][/comment]
+	[op.visibility/] [if (op.type.oclIsUndefined())]void[else] [op.type.name/] [/if] [op.name/]() {
+		// metoda podana z interfejsu
+		}
+[comment]				[/if][/comment]
+			[/for]
+		[/for]
+	[/let]
+[else]
      public [o.type.name/] [o.name/]() {
        // TODO should be implemented
      }
+[/if]
    [/for]
    }
  [/file]
  [/template]
+
+[template public getOperationsFromInt(int : Interface)]
+	template_expression
+[/template]
