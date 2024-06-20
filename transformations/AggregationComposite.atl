@@ -1,0 +1,44 @@
+-- @nsURI MM=http://www.eclipse.org/uml2/5.0.0/UML
+
+module AggregationComposite;
+create OUT : MM refining IN : MM;
+
+
+rule rule1 {
+	from
+		input : MM!Property(input.owner.oclIsTypeOf(MM!Association))
+	to 
+		output : MM!Property (
+			aggregation <- #composite
+		)
+}
+
+-- Helper to check if a class has attributes of another class type
+helper context MM!Class def: hasAttributesOfType(targetType : MM!Class) : Boolean =
+  self.ownedAttribute->exists(attribute | attribute.type = targetType);
+
+
+-- Rule to refine the class
+--rule ClassRefinement {
+--    from
+--        s : MM!Class
+--    to
+--        t : MM!Class (
+--            -- Copy all attributes and modify if type is 'C1'
+--            attributes <- s.attributes->collect(a | 
+--                if a.type.name = 'C1' then
+--                    thisModule.modifyAggregation(a)
+--                else
+--                    a
+--                endif
+--            )
+--        )
+--}
+
+-- Helper function to modify the aggregation kind
+--helper context MM!Class def: modifyAggregation(attr : MM!Attribute) : MM!Attribute =
+--    MM!Attribute {
+--        name <- attr.name,
+--        type <- attr.type,
+--        aggregation <- #composite -- Changing aggregation to composite
+--    };
