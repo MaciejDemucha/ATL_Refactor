@@ -37,3 +37,13 @@ rule ImplementInterface {
 			ownedOperation <- thisModule.emptyOperations(c.interfaceRealization.first().contract)
 		)
 }
+
+rule nameIntRealization {
+	from
+		ir : MM!InterfaceRealization
+	to
+		outIr : MM!InterfaceRealization (
+			name <- ir.contract.toString().substring(4, 5) 	
+		)
+		
+}

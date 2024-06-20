@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
   <uml:Model xmi:type="uml:Model" name="UMLModel" visibility="public" xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_model1">
     <!-- Class C1 -->
-    <packagedElement xmi:type="uml:Class" xmi:id="C1" name="C1" visibility="public"/>
+    <packagedElement xmi:type="uml:Class" xmi:id="C1" name="C1" visibility="public">
+      <ownedOperation xmi:id="C1_method1" name="method" visibility="public"/>
+    </packagedElement>
 
     <!-- Class C2 with attribute of type C1 -->
     <packagedElement xmi:type="uml:Class" xmi:id="C2" name="C2" visibility="public">

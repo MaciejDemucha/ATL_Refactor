@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_model1" name="UMLModel" visibility="public">
-  <packagedElement xmi:type="uml:Class" xmi:id="C1" name="C1" visibility="public"/>
+  <packagedElement xmi:type="uml:Class" xmi:id="C1" name="C1" visibility="public">
+    <ownedOperation xmi:id="C1_method1" name="method" visibility="public"/>
+  </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="C2" name="C2" visibility="public">
     <ownedAttribute xmi:id="C2_attr1" name="attr1" visibility="public" type="C1"/>
   </packagedElement>
@@ -9,15 +11,15 @@
     <ownedOperation xmi:id="I1_method2" name="method2" visibility="public"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="C3" name="C3" visibility="public">
-    <interfaceRealization xmi:id="C3_I1" contract="I1"/>
-    <ownedOperation xmi:id="_SdT4AC8UEe-Us-tV8AJo_g"/>
-    <ownedOperation xmi:id="_SdT4AS8UEe-Us-tV8AJo_g"/>
+    <interfaceRealization xmi:id="C3_I1" name="I1" contract="I1"/>
+    <ownedOperation xmi:id="_o8NE8C8qEe-Us-tV8AJo_g"/>
+    <ownedOperation xmi:id="_o8NE8S8qEe-Us-tV8AJo_g"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="C4" name="C4" visibility="public">
     <ownedAttribute xmi:id="C4_attr1" name="attr1" visibility="public" type="C1"/>
-    <interfaceRealization xmi:id="C4_I1" contract="I1"/>
-    <ownedOperation xmi:id="_SdUfEC8UEe-Us-tV8AJo_g"/>
-    <ownedOperation xmi:id="_SdUfES8UEe-Us-tV8AJo_g"/>
+    <interfaceRealization xmi:id="C4_I1" name="I1" contract="I1"/>
+    <ownedOperation xmi:id="_o8NE8i8qEe-Us-tV8AJo_g"/>
+    <ownedOperation xmi:id="_o8NE8y8qEe-Us-tV8AJo_g"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="assoc_C2_C1">
     <ownedEnd xmi:id="assoc_C2_C1_end1" name="C2_attr1" visibility="public" type="C1"/>
