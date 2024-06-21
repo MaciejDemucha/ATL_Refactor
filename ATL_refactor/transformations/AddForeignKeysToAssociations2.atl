@@ -90,7 +90,8 @@ create OUT : MM refining IN : MM;
 helper def : checkIfClassHasEmptyAttr(c : MM!Class) : Boolean = 
 	MM!Property.allInstances()->select(prop | prop.owner.oclIsTypeOf(MM!Association)).asSequence()
 		->exists(attr | attr.owner.ownedElement.asSequence().first().name.toString().startsWith(c.name) and
-		c.name = attr.owner.ownedElement.asSequence().last().type.name);
+		c.name = attr.owner.ownedElement.asSequence().last().type.name and
+		not c.ownedAttribute->exists(at | at.type = attr.owner.ownedElement.asSequence().first().type));
 			
 helper def: createEmptyAttribute(c : MM!Class) : MM!Property = 
 	if thisModule.checkIfClassHasEmptyAttr(c) then 
